@@ -1,0 +1,220 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="/static/styles/profileUpdate.css">
+
+<style>
+  /* Background color for the whole page */
+  .page-background {
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place it behind other elements */
+  }
+
+  /* Updated styles for the top navigation bar */
+  body {
+    color: #fff; /* Set text color to white */
+  }
+
+
+  .top-navbar {
+      background-color: #000000;
+      padding: 10px 0;
+      border-radius: 0%;
+      display: flex;
+      justify-content: space-between; /* Updated to space between */
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+  .logo {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 30px; /* Adjust the height as needed */
+      margin-right: 10px;
+    }
+
+    .profile-image {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-image img {
+      height: 30px; /* Adjust the height as needed */
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .container {
+      width: 80%;
+      margin: 80px auto 30px; /* Adjusted margin for top navigation bar */
+      padding: 20px;
+      background-color: #000; /* Black background for the content area */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+  .menu-item {
+    text-decoration: none;
+    color: #fff; /* Set text color inside menu items to white */
+    padding: 1px;
+    border-radius: 1px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-item:hover {
+    background-color: #fdfefe;
+  }
+
+  .menu-item span {
+    margin-right: 5px;
+  }
+
+  h1 {
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: bold;
+    color: #1565c0; /* Set text color to white */
+    text-align: center; /* Center the text */
+  }
+
+  .sidebar {
+    background-color: #ffffff;
+    padding: 10px; /* Reduce padding for a smaller size */
+    border-radius: 10px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+  }
+
+  /* Additional styles for the delete button */
+  .delete-account-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e74c3c; /* Red Accent Color */
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .delete-account-button:hover {
+    background-color: #c0392b; /* Darker Red Accent Color */
+  }
+
+  /* Set label text color to white */
+  label {
+    color: #1565c0;
+  }
+
+  /* Adjust input box size */
+  input[type="text"],
+  input[type="file"] {
+    width: 100%; /* Set width to 100% */
+    padding: 8px; /* Adjust padding */
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
+  }
+
+  /* Center the form */
+  .form-group {
+    width: 60%;
+    margin: 20px auto;
+  }
+
+  
+
+  /* Adjust button styles */
+  button {
+    width: 100%;
+    padding: 10px; /* Adjust padding */
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #1565c0;
+  }
+</style>
+{% endblock %}
+
+<title>Edit Profile Page</title>
+
+{% block content %}
+<div class="page-background"></div>
+
+<!-- Top Navigation Bar -->
+<div class="top-navbar">
+  <a class="logo" href="{% url 'home' %}" style="margin-right: 100px;"> <!-- Adjust margin as needed -->
+    <img src="{% static 'images/srminglelogo.png' %}" style="min-width: 60px; min-height: 60px; cursor: pointer;">
+  </a>
+
+  {% if user.is_authenticated %}
+  <div class="create" style="display: flex; align-items: center;">
+
+  <a href="{% url 'logout' %}" style="color: #ffffff; margin-right: 10px; font-weight: bold;">Logout</a>
+
+  {% else %}
+  <a href="{% url 'signup' %}" style="color: #fff; margin-right: 10px;">Signup</a>
+  <a href="{% url 'login' %}" style="color: #fff; margin-right: 10px;">Login</a>
+{% endif %}
+
+</div>
+
+{% if user.is_authenticated %}
+  <div class="container">
+    <h1>Edit Profile</h1>
+
+    <div class="form-group">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button class="btn btn-primary btn-block">Update Profile Page</button>
+      </form>
+    </div>
+
+    <!-- Delete Account Button -->
+    <form method="post" action="{% url 'delete_account' %}">
+        {% csrf_token %}
+        <button type="submit" class="delete-account-button">Delete Account</button>
+    </form>
+  </div>
+  <br/><br/>
+
+  <!-- JavaScript to set placeholder -->
+  <script>
+    var name = "{{ user.first_name }}";
+    document.getElementById("elder").placeholder = name;
+  </script>
+
+{% else %}
+  <p>Login required to view</p>
+{% endif %}
+{% endblock %}

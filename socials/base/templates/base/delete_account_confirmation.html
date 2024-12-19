@@ -1,0 +1,21 @@
+<!-- delete_account_confirmation.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Delete Account Confirmation</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Delete Account Confirmation</h2>
+        <p>Are you sure you want to delete your account, {{ user.username }}?</p>
+
+        <form method="post" action="{% url 'delete_account' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, I'm sure</button>
+        </form>
+
+        <p><a href="{% url 'home' %}">Cancel and go back to home</a></p>
+    </div>
+{% endblock %}

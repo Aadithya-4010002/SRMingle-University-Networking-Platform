@@ -1,0 +1,339 @@
+{% extends 'main.html' %}
+{% load static %} 
+{% block styles %}
+
+<style>
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #000000 !important;
+  color: #262626;
+  padding-bottom: 3rem;
+}
+
+
+.profile {
+  display: flex;
+  align-items: center
+  
+}
+
+.profile-image {
+  flex: 0 0 px;
+  margin-right: 20px;
+}
+
+.profile-image img {
+  width: 180px; /* Adjust size as needed */
+  height: 180px; /* Adjust size as needed */
+  object-fit: cover;
+  border-radius: 50%; /* Makes the image circular */
+  margin-top: 1.7rem;
+  margin-right: 1.8rem;
+
+
+}
+
+.profile-details {
+  flex: 1 1 auto;
+}
+
+.profile-user-settings {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.profile-user-name {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+.profile-stats {
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.profile-stats ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.profile-stats li {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-right: 4rem;
+  cursor: pointer;
+}
+
+.profile-stats li:last-of-type {
+  margin-right: 0;
+}
+
+.profile-bio {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 2rem;
+  margin-RIGHT: 5rem;
+
+}
+
+.profile-real-name,
+.profile-stat-count,
+.profile-edit-btn {
+  font-weight: 600;
+}
+
+.profile-edit-btn,
+.profile-settings-btn {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -1rem -1rem;
+    padding-bottom: 3rem;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1 0 22rem;
+    margin: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item-info {
+    display: none;
+}
+
+.gallery-item-info li {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.gallery-item-likes {
+    margin-right: 2.2rem;
+}
+
+.gallery-item-type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.fa-clone,
+.fa-comment {
+    transform: rotateY(180deg);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body {
+    background:#eee;
+}
+
+html,
+body,
+.view {
+    height:100%;
+}
+
+.navbar-brand {
+    color:#fff !important;
+}
+
+.profile-photo {
+    width:48px;
+    height:auto;
+}
+
+.flex-menu {
+    display:flex;
+    cursor: pointer;
+}
+
+.flex-menu li:not(:last-child) {
+    margin-right:40px;
+}
+
+.profile-name{
+    font-weight:500;
+    font-size: 25px; 
+    color: #212121;
+    padding-left: 20px;
+}
+
+.h2-responsive{
+    font-weight:400;
+    font-size: 25px; 
+    color: #212121;
+    padding-left: 20px;
+}
+
+.flex-menu{
+    list-style:none;
+    position: relative;
+    right:12px;
+}
+
+.follow-btn{
+    margin-left: 30px;
+}
+
+.like{
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.like:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.comment{
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.white-text{
+    font-size: 12px;
+    padding: 3px;
+}
+
+
+
+</style>
+{% endblock %}
+
+{% block title %}
+  <title>Profile</title>
+{% endblock %}
+
+{% block content %}
+
+
+<header>
+  <div class="container">
+    <div class="profile">
+      <div class="profile-image">
+        <a href="{% url 'home' %}">
+
+        <img src="{{ page_user.profileimg.url }}" alt="profileimg" class="img-circle rounded-circle img-fluid">
+        </a>
+      </div>
+
+      <div class="profile-details">
+        <div class="profile-user-settings">
+          <div>
+          <h4 class="profile-user-name" style="margin-top: 20px; color: #fff;">~{{page_user.username}}</h4>
+          <div>
+          <h2 class="profile-real-name" style="margin-top: 0px; color: #fff;">{{page_user.fname}} {{page_user.lname}} </h2>
+          <h5 style="margin-top: 20px; color: #fff;">{{page_user.description}}</h5>
+          </div>
+        </div>
+          
+        <a href="{% url 'accsettings' %}" class="btn profile-edit-btn" style="margin-left: 40rem; color: #fff;">Settings</a>
+        <button class="btn profile-settings-btn" style="color: #fff;" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+        </div>
+
+        <div class="profile-stats">
+          <ul>
+            <li><span class="profile-stat-count">{{num_posts}}</span> Posts</li>
+            <li><span class="profile-stat-count">{{user_followers}}</span> Minglers</li>
+            <li><span class="profile-stat-count">{{user_following}}</span> Mingles</li>
+          </ul>
+        </div>
+      </div>
+
+     
+    </div>
+    <!-- End of profile section -->
+  </div>
+  <!-- End of container -->
+</header>
+
+
+	</div>
+	<!-- End of container -->
+
+<!---- Posts View---->
+<div class="col-md-9 p-t-2" style="margin-top: 70px; margin-right: 40rem; color: #fff;">
+  <form action="/follow" method="POST">
+      {% csrf_token %}
+      <input type="hidden" value="{{ page_user.username }}" name="user" />
+      <input type="hidden" value="{{ request.user.username }}" name="follower" />
+
+      {% if page_user.id != request.user.id %}
+      <div class="text-right" style="color: #1565c0;">
+          <button type="submit" class="btn btn-sm btn-success follow-btn" style="color: #fff; background-color: #1565c0;">{{ button_text }}</button>
+      </div>
+      {% endif %}
+  </form>
+
+  <hr class="border border-1 border-success" style="color: #1565c0;">
+
+  <div class="row">
+      {% for post in logged_in_user_posts %}
+      <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="view overlay hm-black-light m-b-2">
+              <a href="{{ post.image.url }}">
+                  <img src="{{ post.image.url }}" class="img-fluid cursor-pointer" alt="" style="max-height: 250px; width: 100%;">
+              </a>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+</div>
+
+
+
+	<!-- End of container -->
+
+</main>
+
+
+<script>
+const posts = document.querySelectorAll('.gallery-item');
+
+ posts.forEach(post => {
+ 	post.addEventListener('click', () => {
+ 		//Get original image URL
+ 		const imgUrl = post.firstElementChild.src.split("?")[0];
+ 		//Open image in new tab
+ 		window.open(imgUrl, '_blank');
+ 	});
+});
+</script>
+
+{% endblock %}
+

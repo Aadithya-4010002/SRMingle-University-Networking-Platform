@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block styles %}
+  <!-- Include your existing styles and link to the CSS file -->
+  <link rel="stylesheet" href="{% static 'styles/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <!-- Background color for the whole page -->
+  <div class="page-background"></div>
+
+  <!-- Top Navigation Bar -->
+  <nav>
+    <div class="container">
+      <div class="log">
+        <img src="{% static 'images/logo.png' %}" alt="Logo">
+        <span>Your Logo</span>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <button>Search</button>
+      </div>
+
+      <div class="create">
+        <a href="{% url 'add_post' %}">Create Post</a>
+        <div class="profile-photo">
+          <img src="{% static 'images/profile.jpg' %}" alt="Profile Photo">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container friends">
+    <div class="row" style="margin-top: 100px;">
+      <div class="col-md-4">
+        <div class="profile-card" data-tilt>
+          <div class="profile-card-header">
+            <div class="profile-image"></div>
+
+            <div class="profile-info">
+              <h3 class="profile-name">{{ page_user.fname }}</h3>
+              <p class="profile-desc">{{ page_user.caption }}</p>
+            </div>
+          </div>
+
+          <div class="profile-card-body">
+            <ul class="status">
+              <li>
+                <span class="status-value">532</span>
+                <span class="status-text">Posts</span>
+              </li>
+
+              <li>
+                <span class="status-value">1.5m</span>
+                <span class="status-text">Followers</span>
+              </li>
+
+              <li>
+                <span class="status-value">423</span>
+                <span class="status-text">Following</span>
+              </li>
+            </ul>
+
+            <div class="action">
+              <button class="btn btn-danger follow">Follow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'scripts/vanilla-tilt.js' %}"></script>
+{% endblock %}

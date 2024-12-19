@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrollable Calendar</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .calendar {
+    width: 100%;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .month-bar {
+    background-color: #ccc;
+    height: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="calendar">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Day</th>
+        <th>Event</th>
+        <th>Day Order</th>
+      </tr>
+    </thead>
+    <tbody id="calendarBody">
+      <!-- Calendar content will be generated here -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+const events = [
+  { date: 'Jan 1 2024', day: 'Mon', event: "NEW YEAR '2024 - HOLIDAY", dayOrder: '-' },
+ 
+  { date: 'Jan 3 2024', day: 'Wed', event: 'Enrollment (seniors)For all years and Programmes-B.Tech/M.Tech(Int)/B.Arch/B.Des/M.Tech/M.Arch/M.Des/Minor', dayOrder: '-' },
+  { date: 'Jan 4 2024', day: 'Thu', event: 'Commencement of classes - I year M.Tech', dayOrder: '1' },
+ 
+
+  { date: 'Jan 8 2024', day: 'Mon', event: 'Enrollment I year B.Tech', dayOrder: '3' },
+  { date: 'Jan 9 2024', day: 'Tue', event: 'Commencement of classes - I year B.Tech / IV yr B.Tech & II yr M.Tech/M.Arch/M.Des -Presentation of Literature survey-Plan of Action-work models', dayOrder: '4' },
+
+  { date: 'Jan 12 2024', day: 'Fri', event: 'Commencement of classes - II, III, IV Yr B.Tech / B.Arch / B.Des, Minor Programme', dayOrder: '-' },
+
+  { date: 'Jan 15 2024', day: 'Mon', event: "Pongal - Holiday", dayOrder: '-' },
+  { date: 'Jan 16 2024', day: 'Tue', event: "Tiruvalluvar Day - Holiday", dayOrder: '-' },
+  { date: 'Jan 17 2024', day: 'Wed', event: "Uzhavar Thirunal - Holiday", dayOrder: '-' },
+
+  { date: 'Jan 25 2024', day: 'Thu', event: "Thai Poosam - Holiday", dayOrder: '-' },
+  { date: 'Jan 26 2024', day: 'Fri', event: "Republic Day - Holiday", dayOrder: '-' },
+
+  { date: 'Jan 30 2024', day: 'Tue', event: "Interim Assesment to be completed before the End of 3rd week - B.Tech/M.Tech(Int)/B.Arch / B.Des - All semester", dayOrder: '-' },
+
+];
+
+// Function to generate calendar
+function generateCalendar() {
+  const calendarBody = document.getElementById('calendarBody');
+  calendarBody.innerHTML = '';
+
+  let currentMonth = '';
+  events.forEach(event => {
+    const row = document.createElement('tr');
+    const dateCell = document.createElement('td');
+    const dayCell = document.createElement('td');
+    const eventCell = document.createElement('td');
+    const dayOrderCell = document.createElement('td');
+
+    // Check if the month has changed
+    if (event.date.startsWith(currentMonth)) {
+      // If the month is the same, insert event details as usual
+      dateCell.textContent = event.date;
+    } else {
+      // If it's a new month, insert a new row with a month bar
+      const monthRow = document.createElement('tr');
+      const monthBarCell = document.createElement('td');
+      monthBarCell.setAttribute('colspan', '4');
+      monthBarCell.classList.add('month-bar');
+      monthRow.appendChild(monthBarCell);
+      calendarBody.appendChild(monthRow);
+
+      // Update the current month
+      currentMonth = event.date.substr(0, 7);
+    }
+
+    dayCell.textContent = event.day;
+    eventCell.textContent = event.event;
+    dayOrderCell.textContent = event.dayOrder;
+
+    row.appendChild(dateCell);
+    row.appendChild(dayCell);
+    row.appendChild(eventCell);
+    row.appendChild(dayOrderCell);
+
+    calendarBody.appendChild(row);
+  });
+}
+
+// Call the function to generate calendar on page load
+generateCalendar();
+</script>
+</body>
+</html>

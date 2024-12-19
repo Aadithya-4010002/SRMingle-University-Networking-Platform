@@ -1,0 +1,529 @@
+<!-- {% extends 'main.html' %} -->
+
+
+{% load static %} 
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'styles/post.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/introductionstyles.css' %}"> <!-- Link to introductionstyles.css -->
+
+  <style>
+    body {
+      font-family: "Times New Roman", Times, serif !important;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      font-family: "Times New Roman", Times, serif !important;
+      text-align: left;
+      margin-top: 10px;
+      color: #1565c0;
+      font-weight: bold !important;
+    }
+
+  
+.search-bar{
+    background: #fff !important;
+    border-radius: 2px;
+    border-color: #ccc !important;
+    padding: 7px !important;
+    
+
+}
+
+.search-bar input[type="search"]{
+    background: transparent;
+    width: 30vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+nav .search-bar input[type="search"]::placeholder{
+    color: #fff !important;
+}
+
+    .menu-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  color: #ffffff;
+  transition: background-color 0.1s;
+  background-color: #000000; /* Dark gray background for buttons */
+}
+
+.menu-item:hover {
+  background-color: #1565c085
+ !important; /* Light gray background on hover */
+  filter: brightness(100%); /* Add blue tint on hover */
+}
+
+    .page-background {
+      background-color: #000;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1; /* Place it behind other elements */
+    }
+    h3 {
+      font-family: "Times New Roman", Times, serif !important;
+
+      text-align: left;
+      margin-top: 0px;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+
+    .sidebar a {
+      font-family: "Times New Roman", Times, serif !important;
+      color: #fff; /* Set text color to white */
+    }
+
+    .sidebar a:hover {
+      background-color: #1565c0; /* Change sidebar hover color to blue */
+    }
+    
+</style>
+
+<div class="page-background"></div> 
+
+
+<link rel="stylesheet" href="{% static 'styles/home.scss' %}" />
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+
+<!-- Font-awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  #heart.red {
+    color: rgb(255, 255, 255);
+  }
+  body {
+    font-family: "Times New Roman", Times, serif !important;
+  }
+
+  nav::after {
+  content: '';
+  display: block;
+  border-bottom: 1px solid #FFF; /* Set the style, color, and width of the line */
+  margin-top: 20px; /* Adjust the spacing between the line and the navigation bar */
+}
+main .container .right{
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top-right);
+    bottom: 0;
+    color: #000000 !important;
+}
+main .container{
+    display: inline-grid;
+    grid-template-columns: 18vw auto 20vw;
+    column-gap: 2rem;
+    position: relative;
+}
+
+
+
+/* FEEDS */
+.middle .feeds .feed{
+    background: #000000 !important;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.middle .feed .head{
+    display: flex;
+    justify-content: space-between;
+    color: #fff !important;
+
+
+}
+
+.middle .feed .user{
+    display: flex;
+    gap: 1rem;
+    color: #fff !important;
+}
+
+.middle .feed .photo{
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    margin: 0.7rem 0;
+    color: #fff;
+
+}
+
+.middle .feed .action-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0.6rem;
+    color: #fff;
+
+}
+
+.middle .liked-by{
+    display: flex;
+    color: #1565c0;
+
+}
+
+.middle .liked-by span{
+    width: 1.4rem;
+    height: 1.4rem;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--color-white);
+    margin-left: -0.6rem;
+    color: #1565c0;
+
+}
+.profile-photo{
+    width: 3rem;
+    height: 3rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    object-position: center;
+    object-fit: cover;
+
+    
+}
+
+.middle .liked-by span:first-child{
+    margin: 0;
+    color: #1565c0;
+
+}
+
+.middle .liked-by p{
+    margin-left: 0.5rem;
+    color: #1565c0;
+
+}
+
+
+.middle .stories{
+    display: flex;
+    justify-content: space-between;
+    height: 12rem;
+    gap: 0.5rem;
+    background: var(--color-light);
+    color: #fff;
+
+}
+
+.middle .stories .story{
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 0.75rem;
+    width: 100%;
+    background: red;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+
+}
+
+.middle .stories .story::before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5rem;
+    background: linear-gradient(transparent,rgba(0,0,0,0.75));
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+
+}
+
+.middle .stories .story .name{
+    z-index: 2;
+    color: #fff;
+
+}
+
+.middle .stories .story:nth-child(1){
+    background: url("./images/story-1.jpg")
+    no-repeat center center/cover;
+}
+
+.middle .stories .story:nth-child(2){
+    background: url("./images/story-2.jpg")
+    no-repeat center center/cover;
+}
+
+.middle .stories .story:nth-child(3){
+    background: url("./images/story-3.jpg")
+    no-repeat center center/cover;
+}
+
+.middle .stories .story:nth-child(4){
+    background: url("./images/story-4.jpg")
+    no-repeat center center/cover;
+}
+
+.middle .stories .story:nth-child(5){
+    background: url("./images/story-5.jpg")
+    no-repeat center center/cover;
+}
+
+.middle .stories .story:nth-child(6){
+    background: url("./images/story-6.jpg")
+    no-repeat center center/cover;
+}
+
+.middle .story .profile-photo{
+    width: 2rem;
+    height: 2rem;
+    align-self: start;
+    border: 3px solid var(--color-primary);
+    color: #fff;
+
+}
+
+/* CREATE POST */
+
+.middle .create-post{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    background: var(--color-white);
+    padding: 0.4rem var(--btn-padding);
+    border-radius: var(--border-radius);
+    color: #fff;
+
+}
+
+.middle .create-post input[type='text']{
+    justify-self: start;
+    width: 100%;
+    padding-left: 1rem;
+    background: transparent;
+    color: var(--color-dark);
+    margin-right: 1rem;
+    color: #fff;
+
+}
+.right .friend-requests{
+    margin-top: 1rem;
+    color: #000 !important;
+}
+
+
+</style>
+
+<style>
+  .full-width-container {
+      display: grid; /* Change display to grid */
+      grid-template-columns: auto 1fr auto; /* Define grid columns for left, middle, and right components */
+      max-width: 1600px;
+      min-width: 1400px;
+      box-sizing: border-box;
+  }
+</style>
+{% endblock %}
+
+<!-- Title -->
+{% block title %}
+<title>Dashboard</title>
+{% endblock %}
+
+{% block content %} 
+<nav style="background-color: #000000; padding: 10px 0; color: #ffffff;">
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; height: 100%; min-width: 1400px; max-width: 2000px;">
+<!-- Logo -->
+<div class="log" style="display: flex; align-items: center;">
+  <a href="{% url 'home' %}">
+    <img src="{% static 'images/mingle1.png' %}" style="max-width: 178.8px; max-height: 178.8px; cursor: pointer; margin-right:100px; margin-left: 35px; margin-top: 15px;">
+  </a>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- MAIN -->
+<main style="background-color: #000000; padding-top: 40px;">
+  <div class="full-width-container" style="width: 100%;" >
+    <div class="left" >
+
+    
+    <!---Middle-->
+    <div class="middle" style="width: 85%; margin-left: 100px;">
+        <!-- FEED -->
+        <div class="feeds">
+          <!-- FEED 1 -->
+          {% if count_posts == 0  %}
+          <div class="empty-state">
+            <div class="empty-state__content">
+              <div class="empty-state__icon">
+                <img src="{% static 'images/404srm.webp' %}" alt="">
+              </div>
+              <div class="empty-state__message" style="color: #ffffff; font-weight: bold; font-size: 30px; text-align: center;">No posts have been added yet.</div>
+              <br/><br/><br/>
+            </div>
+          </div>
+          {% else %}
+          {% for post in all_posts reversed %}
+          
+          <div class="feed" style="margin-bottom: 70px;">
+            <div class="head">
+              <div class="user">
+                <div class="profile-photo" style="margin-top: 6px;">
+                  <a href="{% url 'show_profile_page' post.profileid %}">
+                    <img src="{{ post.get_owner_pp }}" alt="profile-13" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                  </a>
+                </div>
+  
+                <div style="color: #fff;">
+                  <h4>~ {{ post.author }}</h4>
+                  <h6 style="font-size: 15px; margin-bottom: 5px;"> <i class="fa-solid fa-location-dot" style="color: #ccc; margin-right: 7px;"></i>{{ post.location }}</h6>
+                </div>
+  
+              </div>
+              <span class="edit">
+                <ul>
+                  <li> 
+                    {% if user.is_authenticated %}  
+                    {% if profile.user.username != post.author.user.username %}
+                    <a href="{% url 'delete_post' post.pk %}" class="delete-icon"><i class="fa-solid fa-trash-arrow-up"></i></a> 
+  
+                  <!-- edit and delete post settings-->
+  
+                    {% endif %}
+                    {% endif %}
+                  </li>
+                </ul>
+              </span>
+            </div>
+            <div class="photo">
+              <a href="{% url 'home' %}">
+                <img src="{{ post.image.url }}" alt="feed-1" style="height: 500px; object-fit: cover;">
+              </a>
+            </div>
+  
+            <style>
+              .interaction-buttons a {
+                text-decoration: none;
+                color: #fff;
+                margin-right: 10px;
+              }
+            </style>
+            <div class="action-buttons">
+              <div class="interaction-buttons";>
+                <a href="/like-post?post_id={{post.id}}" onclick="toggleLike()" style="text-decoration: none; color: #1565c0c4;">
+                  <i class="fa-solid fa-heart-circle-plus"></i>                                
+                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-left:4px; color: #1565c0c4; cursor: pointer;">
+     
+                  <span><i class="fa-solid fa-comments"></i></span>
+                </a>
+              </div>
+              
+              {% if post.image %}
+      <a href="{{ post.image.url }}" class="flex items-center space-x-2 flex-1 justify-end" style="color: #1565c0c4; text-decoration: none;" download>
+          <i id="downloadIcon" class="fas fa-share" style="margin-right: 200%;"></i>
+      </a>
+  {% endif %}
+  
+  
+                <script>
+                  // Get the download icon element
+                  var downloadIcon = document.getElementById('downloadIcon');
+                
+                  // Add click event listener
+                  downloadIcon.addEventListener('click', function() {
+                    // Create a fake anchor element
+                    var link = document.createElement('a');
+                    link.setAttribute('href', 'path_to_your_file.ext'); // Specify the file path to be downloaded
+                    link.setAttribute('download', 'filename.ext'); // Specify the filename for the downloaded file
+                    link.click(); // Trigger the download
+                  });
+                </script>
+                
+                </a>
+            </div>
+            <div class="liked-by" style="color: #1565c0;">
+              {% if post.no_of_likes == 0 %}
+              <p><b style="color: #FFF;">No Vibes Yet</b></p>
+              {% else %}
+              <p><b style="color: #FFF;"> {{post.no_of_likes}} Vibes </b></p>
+              {% endif %}
+            </div>
+            <div class="caption" style="color: #fff; margin-left: 8px;">
+              <b> {{ post.caption|safe }}</b>
+            </div>
+            
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Comments</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    {% if not post.comments.all %}
+                    No Comments yet. <a href="{% url 'add_comment' post.pk %}" > <i class="fa-solid fa-circle-plus" style="color: #1565c0;"></i> Add Comment</a>
+                    {% else %}
+                    <a href="{% url 'add_comment' post.pk %}" > <i class="fa-solid fa-circle-plus" style="color: #1565c0;"></i> </a> Add Comment <br>
+                    {% for comment in post.comments.all %}
+                    <br>
+                    <strong>{{ comment.name }}-{{ comment.date_added }}</strong>
+                    <br/>
+                    {{ comment.body }}
+                    <br/>
+                    <hr>
+                    {% endfor %} 
+                    {% endif %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+
+
+
+
+<!---Right-->
+
+<script type="text/javascript">
+  (function() {
+    const heart = document.getElementById('heart');
+    heart.addEventListener('click', function() {
+      heart.classList.toggle('red');
+    });
+  })();
+</script>
+{% endblock %}
